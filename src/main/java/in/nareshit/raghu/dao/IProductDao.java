@@ -11,4 +11,5 @@ public interface IProductDao {
 	void updateProduct(Product p);
 	Product getOneProduct(Integer id);
 	List<Product> getAllProducts();
+	Integer updateProductCode(String prodCode,Integer prodId);
 }
