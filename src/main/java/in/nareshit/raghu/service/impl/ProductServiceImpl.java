@@ -48,5 +48,10 @@ public class ProductServiceImpl implements IProductService {
 	public List<Product> getAllProducts() {
 		return dao.getAllProducts();
 	}
+	
+	@Transactional
+	public Integer updateProductCode(String prodCode, Integer prodId) {
+		return dao.updateProductCode(prodCode, prodId);
+	}
 
 }

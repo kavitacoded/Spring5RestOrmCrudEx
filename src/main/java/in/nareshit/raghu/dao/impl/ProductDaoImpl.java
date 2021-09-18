@@ -11,7 +11,7 @@ import in.nareshit.raghu.entity.Product;
 
 @Repository
 public class ProductDaoImpl implements IProductDao {
-	
+
 	@Autowired
 	private HibernateTemplate ht;
 
@@ -22,17 +22,28 @@ public class ProductDaoImpl implements IProductDao {
 	public void deleteProduct(Product p) {
 		ht.delete(p);
 	}
-	
+
 	public void updateProduct(Product p) {
 		ht.update(p);
 	}
-	
+
 	public Product getOneProduct(Integer id) {
 		return ht.get(Product.class, id);
 	}
-	
+
 	public List<Product> getAllProducts() {
 		return ht.loadAll(Product.class);
+	}
+
+	public Integer updateProductCode(String prodCode, Integer prodId) {
+		return ht.execute(session -> {
+			return session.createQuery(
+					"UPDATE Product SET prodCode=:prodCode WHERE prodId=:prodId"
+					)
+					.setParameter("prodCode", prodCode)
+					.setParameter("prodId", prodId)
+					.executeUpdate();
+		});
 	}
 
 }
